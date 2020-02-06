@@ -1,5 +1,5 @@
 import "./App.css";
-import Calculator from "./components/calculator";
+import Calculator from "./components/Calculator";
 
 import React from "react";
 import Container from "@material-ui/core/Container";
