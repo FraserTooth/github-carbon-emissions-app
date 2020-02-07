@@ -20,15 +20,22 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const countryCarbonIntensities = {
-  USA: 600,
+  USA: 623,
   Japan: 600,
   "United Kingdom": 250,
   China: 900
 };
 
+const bundleCarbonEmissions = (size, country) => {
+  const kWhPerMB = 0.0059;
+  return kWhPerMB * size * countryCarbonIntensities[country];
+};
+
 export default () => {
   const [bundleSize, setBundle] = useState(0);
   const [country, setCountry] = useState("USA");
+
+  const carbonTotal = bundleCarbonEmissions(bundleSize, country);
 
   const handleSubmit = async e => {
     e.preventDefault();
@@ -96,7 +103,7 @@ export default () => {
             </Grid>
             <Grid item xs={12}>
               <Typography>
-                Emissions: {bundleSize * 4.084} gCO2eq per Download
+                Emissions: {carbonTotal} gCO2eq per Download
               </Typography>
             </Grid>
           </Grid>
