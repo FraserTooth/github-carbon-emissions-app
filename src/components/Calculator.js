@@ -4,7 +4,18 @@ import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import Grid from "@material-ui/core/Grid";
+import Paper from "@material-ui/core/Paper";
 import { getSize } from "../scripts/githubapi";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles(theme => ({
+  paper: {
+    display: "flex",
+    padding: "10px",
+    margin: "10px"
+  }
+}));
 
 function Calculator() {
   const [url, setUrl] = useState("");
@@ -18,25 +29,46 @@ function Calculator() {
     setSize(size);
   };
 
+  const classes = useStyles();
+
   return (
     <Container>
       <Box>
-        <Typography>Point at a Github Repo</Typography>
-
-        <form onSubmit={handleSubmit}>
-          <TextField
-            id="github-basic"
-            label="Github Page"
-            value={url}
-            onChange={e => setUrl(e.target.value)}
-          />
-          <Button variant="contained" type="submit">
-            Calculate
-          </Button>
-        </form>
-
-        <Typography>{githubsize}MB</Typography>
-        <Typography>{githubsize * 4.084} gCO2eq per Download</Typography>
+        <Paper className={classes.paper}>
+          <Grid container spacing={1}>
+            <Grid item xs={12}>
+              <Typography>Enter the Url for a Github Repo</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <form onSubmit={handleSubmit}>
+                <Grid container spacing={1}>
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      id="github-basic"
+                      label="Github Repository URL"
+                      value={url}
+                      onChange={e => setUrl(e.target.value)}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button variant="contained" type="submit">
+                      Calculate
+                    </Button>
+                  </Grid>
+                </Grid>
+              </form>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography>Github Repo Size: {githubsize}MB</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography>
+                Emissions: {githubsize * 4.084} gCO2eq per Download
+              </Typography>
+            </Grid>
+          </Grid>
+        </Paper>
       </Box>
     </Container>
   );

@@ -9,7 +9,7 @@ const getSize = async url => {
   var reg = new RegExp(expression);
 
   if (!url.match(reg)) {
-    alert(`Github URL ${url} not valid`);
+    alert(`URL ${url} not valid`);
   } else {
     const apiLocation = githubAPI + url.split(".com/")[1];
     try {
