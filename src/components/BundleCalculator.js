@@ -6,8 +6,9 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
-import { getSize } from "../scripts/githubapi";
 import { makeStyles } from "@material-ui/core/styles";
+import NativeSelect from "@material-ui/core/NativeSelect";
+import InputLabel from "@material-ui/core/InputLabel";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -17,16 +18,16 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Calculator() {
-  const [url, setUrl] = useState("");
-  const [githubsize, setSize] = useState(0);
+export default () => {
+  const [bundleSize, setBundle] = useState(0);
+  const [country, setCountry] = useState("USA");
 
   const handleSubmit = async e => {
     e.preventDefault();
 
-    const size = await getSize(url);
-
-    setSize(size);
+    //Calculate Carbon
+    console.log(bundleSize, country);
+    //setSize(size);
   };
 
   const classes = useStyles();
@@ -37,7 +38,7 @@ function Calculator() {
         <Paper className={classes.paper}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
-              <Typography>Enter the Url for a Github Repo</Typography>
+              <Typography>Fill out the Form</Typography>
             </Grid>
             <Grid item xs={12}>
               <form onSubmit={handleSubmit}>
@@ -46,10 +47,23 @@ function Calculator() {
                     <TextField
                       fullWidth
                       id="github-basic"
-                      label="Github Repository URL"
-                      value={url}
-                      onChange={e => setUrl(e.target.value)}
+                      label="Bundle Size"
+                      value={bundleSize}
+                      type="number"
+                      onChange={e => setBundle(e.target.value)}
                     />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <InputLabel>Country</InputLabel>
+                    <NativeSelect
+                      value={country}
+                      onChange={e => setCountry(e.target.value)}
+                    >
+                      <option value={"USA"}>USA</option>
+                      <option value={"Japan"}>Japan</option>
+                      <option value={"UK"}>UK</option>
+                    </NativeSelect>
                   </Grid>
                   <Grid item xs={12}>
                     <Button variant="contained" type="submit">
@@ -60,11 +74,13 @@ function Calculator() {
               </form>
             </Grid>
             <Grid item xs={12}>
-              <Typography>Github Repo Size: {githubsize}MB</Typography>
+              <Typography>
+                Bundle Size: {bundleSize}MB, hosted in the {country}
+              </Typography>
             </Grid>
             <Grid item xs={12}>
               <Typography>
-                Emissions: {githubsize * 4.084} gCO2eq per Download
+                Emissions: {bundleSize * 4.084} gCO2eq per Download
               </Typography>
             </Grid>
           </Grid>
@@ -72,6 +88,4 @@ function Calculator() {
       </Box>
     </Container>
   );
-}
-
-export default Calculator;
+};

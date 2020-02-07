@@ -1,5 +1,6 @@
 import "./App.css";
-import Calculator from "./components/Calculator";
+import GitHubCalculator from "./components/GitHubCalculator";
+import BundleCalculator from "./components/BundleCalculator";
 
 import React from "react";
 import Container from "@material-ui/core/Container";
@@ -27,7 +28,8 @@ export default function App() {
         <Typography variant="h4" component="h1" gutterBottom>
           The Carbon Impact of Code
         </Typography>
-        <Calculator />
+        <GitHubCalculator />
+        <BundleCalculator />
         <Copyright />
       </Box>
     </Container>
