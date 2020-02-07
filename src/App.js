@@ -13,11 +13,12 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://frasertooth.dev">
-        Fraser Tooth
-      </Link>{" "}
+      <Link href="https://frasertooth.dev">Fraser Tooth</Link>{" "}
       {new Date().getFullYear()}
-      {"."}
+      {". Check out the "}
+      <Link href="https://github.com/FraserTooth/github-carbon-emissions-app">
+        Github Repo
+      </Link>{" "}
     </Typography>
   );
 }
