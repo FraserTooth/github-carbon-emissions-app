@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import TextField from "@material-ui/core/TextField";
+import Input from "@material-ui/core/Input";
 import Button from "@material-ui/core/Button";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
 import { makeStyles } from "@material-ui/core/styles";
 import NativeSelect from "@material-ui/core/NativeSelect";
-import InputLabel from "@material-ui/core/InputLabel";
+import InputAdornment from "@material-ui/core/InputAdornment";
+import FormHelperText from "@material-ui/core/FormHelperText";
 
 const useStyles = makeStyles(theme => ({
   paper: {
@@ -53,19 +54,21 @@ export default () => {
             <Grid item xs={12}>
               <form onSubmit={handleSubmit}>
                 <Grid container spacing={1}>
-                  <Grid item xs={12}>
-                    <TextField
+                  <Grid item xs={4}>
+                    <Input
                       fullWidth
                       id="github-basic"
                       label="Bundle Size"
                       value={bundleSize}
                       type="number"
                       onChange={e => setBundle(e.target.value)}
+                      endAdornment={
+                        <InputAdornment position="end">MB</InputAdornment>
+                      }
                     />
                   </Grid>
 
-                  <Grid item xs={12}>
-                    <InputLabel>Country</InputLabel>
+                  <Grid item xs={4}>
                     <NativeSelect
                       value={country}
                       onChange={e => setCountry(e.target.value)}
@@ -74,8 +77,9 @@ export default () => {
                         return <option value={country}>{country}</option>;
                       })}
                     </NativeSelect>
+                    <FormHelperText>Severs Located In</FormHelperText>
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item xs={4}>
                     <Button variant="contained" type="submit">
                       Calculate
                     </Button>
