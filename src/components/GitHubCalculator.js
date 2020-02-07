@@ -37,7 +37,14 @@ export default () => {
         <Paper className={classes.paper}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
-              <Typography>Enter the Url for a Github Repo</Typography>
+              <Typography variant="h5">
+                Github Repo Download Carbon Output
+              </Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="overline">
+                Enter the Url for a Github Repo
+              </Typography>
             </Grid>
             <Grid item xs={12}>
               <form onSubmit={handleSubmit}>

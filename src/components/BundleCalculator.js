@@ -18,6 +18,13 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+const countryCarbonIntensities = {
+  USA: 600,
+  Japan: 600,
+  "United Kingdom": 250,
+  China: 900
+};
+
 export default () => {
   const [bundleSize, setBundle] = useState(0);
   const [country, setCountry] = useState("USA");
@@ -38,7 +45,10 @@ export default () => {
         <Paper className={classes.paper}>
           <Grid container spacing={1}>
             <Grid item xs={12}>
-              <Typography>Fill out the Form</Typography>
+              <Typography variant="h5">Bundle Size Carbon Output</Typography>
+            </Grid>
+            <Grid item xs={12}>
+              <Typography variant="overline">Fill out the Form</Typography>
             </Grid>
             <Grid item xs={12}>
               <form onSubmit={handleSubmit}>
@@ -60,9 +70,9 @@ export default () => {
                       value={country}
                       onChange={e => setCountry(e.target.value)}
                     >
-                      <option value={"USA"}>USA</option>
-                      <option value={"Japan"}>Japan</option>
-                      <option value={"UK"}>UK</option>
+                      {Object.keys(countryCarbonIntensities).map(country => {
+                        return <option value={country}>{country}</option>;
+                      })}
                     </NativeSelect>
                   </Grid>
                   <Grid item xs={12}>
@@ -75,7 +85,9 @@ export default () => {
             </Grid>
             <Grid item xs={12}>
               <Typography>
-                Bundle Size: {bundleSize}MB, hosted in the {country}
+                Bundle Size: {bundleSize}MB, hosted in {country}, which has an
+                average carbon intensity of {countryCarbonIntensities[country]}{" "}
+                gCO2eq/kWh
               </Typography>
             </Grid>
             <Grid item xs={12}>
