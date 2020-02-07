@@ -14,7 +14,7 @@ const getSize = async url => {
     const apiLocation = githubAPI + url.split(".com/")[1];
     try {
       const response = await axios(apiLocation);
-      return response.data.size;
+      return response.data.size / 1000;
     } catch (e) {
       console.error(e);
     }
